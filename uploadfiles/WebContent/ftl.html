@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="http://127.0.0.1:9091/ftl/downDataSource" method="post">
+			驱动:<input type="text" name="driverClassName" /><br>
+			url:<input type="text" name="url" /><br>
+			用户:<input type="text" name="userName" /><br>
+			密码:<input type="text" name="password" /><br>
+			<input type="submit" value="生成数据库表信息文档">
+		</form>
+		<hr>
+		
+		<form action="http://127.0.0.1:9091/ftl/loadTemplate" method="post">
+			驱动:<input type="text" name="driverClassName" /><br>
+			url:<input type="text" name="url" /><br>
+			用户:<input type="text" name="userName" /><br>
+			密码:<input type="text" name="password" /><br>
+			包名:<input type="text" name="packageName" /><br>
+			表名:<input type="text" name="tableName" /><br> 
+			<input type="submit" value="下载模板">
+		</form>
+		 
+	</body>
+</html>
