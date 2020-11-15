@@ -15,10 +15,6 @@ import org.springframework.stereotype.Component;
 public class FileTimer {
 	private final static String ZIP_PATH = "E:\\module\\zip";
 	
-	private FileTimer()
-	{
-		
-	}
 	@Async
 	@Scheduled(cron="59 59 23 * * ?")
 	public void deleteFiles()
