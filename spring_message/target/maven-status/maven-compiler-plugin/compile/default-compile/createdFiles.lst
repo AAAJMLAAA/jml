@@ -1,0 +1,6 @@
+spring_message\common\dao\servcie\BaseService.class
+spring_message\common\entity\ResultData.class
+spring_message\common\dao\BaseDao.class
+spring_message\common\entity\BaseEntity.class
+spring_message\common\dao\servcie\impl\BaseServiceImpl.class
+spring_message\common\dao\impl\BaseDaoImpl.class

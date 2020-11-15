@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring_message_producer.dao">
+
+	<insert id="insert" parameterType="Student" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into student(id,name,pwd,birthday)
+		value(#{id},#{name},#{pwd},#{birthday})
+	</insert>
+
+	<update id="updateById" parameterType="Student">
+		update student
+		<set>
+			<if test="name != null and name != ''">
+				name = #{name},
+			</if>
+			<if test="pwd != null and pwd != ''">
+				pwd = #{pwd},
+			</if>
+			<if test="birthday != null and birthday != ''">
+				birthday = #{birthday},
+			</if>
+		</set>
+		<where>
+			id = #{id}
+		</where>
+	</update>
+
+	<select id="queryCondition" parameterType="Student" resultType="Student">
+		select * from student
+		<where>
+			<include refid="condtion"/>
+		</where>
+	</select>
+
+	<select id="queryConditionVo" parameterType="Student" resultType="spring_message_producer.vo.StudentVo">
+		select * from student
+		<where>
+			<include refid="condtion"/>
+		</where>
+	</select>
+	
+	<select id="queryConditionCount" parameterType="Student"
+		resultType="java.lang.Long">
+		select count(*) from student
+		<where>
+			<include refid="condtion"/>
+		</where>
+	</select>
+
+	<sql id="condtion">
+		<if test="name != null and name != ''">
+			and name = #{name}
+		</if>
+		<if test="pwd != null and pwd != ''">
+			and pwd = #{pwd}
+		</if>
+		<if test="birthday != null and birthday != ''">
+			and birthday = #{birthday}
+		</if>
+	</sql>
+	<select id="queryConditionPage" parameterType="Student"
+		resultType="Student">
+		select * from student
+		<where>
+				<include refid="condtion"/>
+		</where>
+		limit #{pageIndex},#{pageSize}
+	</select>
+	<!--  <resultMap type="Student" id="StudentMap"> <result property="id" column="id" 
+		jdbcType="INTEGER"/> <result property="name" column="name" jdbcType="VARCHAR"/> 
+		<result property="age" column="age" jdbcType="INTEGER"/> </resultMap>  -->
+
+
+	<delete id="deleteById">
+		delete from student where id = #{id}
+	</delete>
+
+</mapper>
