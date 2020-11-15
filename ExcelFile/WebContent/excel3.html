@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 首先添加垫片 参考https://github.com/SheetJS/sheetjs -->
+<script type="text/javascript" src="./js/shim.min.js"></script>
+<script type="text/javascript" src="./js/xlsx.full.min.js"></script>
+</head>
+<body>
+<table id="table1" border="1" cellspacing="0" cellpadding="0" >
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>兴趣</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>张三</td>
+                <td>18</td>
+                <td>打游戏</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>李四</td>
+                <td>88</td>
+                <td>看电影</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>王五</td>
+                <td>81</td>
+                <td>睡觉</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="btn" onclick="btn_export()">导出</button>
+    
+    <script>
+    function btn_export() {
+       var table1 = document.querySelector("#table1");
+       var sheet = XLSX.utils.table_to_sheet(table1);//将一个table对象转换成一个sheet对象
+       // openDownloadDialog(sheet2blob(sheet),'下载.xlsx'); 这种的IE不支持报错
+       sheet2blob(sheet);
+    }
+    
+ // 将一个sheet转成最终的excel文件的blob对象，然后利用URL.createObjectURL下载
+    function sheet2blob(sheet, sheetName) {
+        sheetName = sheetName || 'sheet1';
+        var workbook = {
+            SheetNames: [sheetName],
+            Sheets: {}
+        };
+        workbook.Sheets[sheetName] = sheet; // 生成excel的配置项
+
+        var wopts = {
+            bookType: 'xlsx', // 要生成的文件类型
+            bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+            type: 'binary'
+        };
+       // var wbout = XLSX.write(workbook, wopts);
+      //  var wbout = XLSX.write(workbook,"下載.xslx",wopts);
+      	var wbout = XLSX.writeFile(workbook, 'output.xlsx');
+        var blob = new Blob([s2ab(wbout)], {
+            type: "application/octet-stream"
+        }); // 字符串转ArrayBuffer
+        function s2ab(s) {
+            var buf = new ArrayBuffer(s.length);
+            var view = new Uint8Array(buf);
+            for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+            return buf;
+        }
+        return blob;
+    }
+    
+    function openDownloadDialog(url, saveName) {
+        if (typeof url == 'object' && url instanceof Blob) {
+            url = URL.createObjectURL(url); // 创建blob地址
+        }
+        
+        var aLink = document.createElement('a');
+        aLink.href = url;
+        aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+        var event;
+        if (window.MouseEvent) event = new MouseEvent('click');
+        else {
+            event = document.createEvent('MouseEvents');
+            event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        }
+        aLink.dispatchEvent(event);
+    }
+</script>
+</body>
+</html>
