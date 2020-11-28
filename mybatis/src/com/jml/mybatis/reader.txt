@@ -1,0 +1,18 @@
+MapperScannerConfigurer
+
+SqlSessionFactory#mapperLocations，指定xml文件的配置路径。
+SqlSessionFactory#configLocation，指定mybaits的配置文件，该配置文件也可以配置mapper.xml的配置路径信息。
+MapperScannerConfigurer，扫描Mapper的java类(DAO)。
+XMLMapperBuilder 
+
+StatementType  对应不同语句的处理类型
+SqlCommandType 对应sql语句类型的 未知，插入，更新，删除，查询，刷新。
+ResultSetType 结果集的游标滚动指向
+ResultSet.TYPE_FORWORD_ONLY 结果集的游标只能向下滚动。
+ResultSet.TYPE_SCROLL_INSENSITIVE 结果集的游标可以上下移动，当数据库变化时，当前结果集不变。
+ResultSet.TYPE_SCROLL_SENSITIVE 返回可滚动的结果集，当数据库变化时，当前结果集同步改变。
+
+
+https://blog.csdn.net/prestigeding/article/details/90488395参考这个文章
+
+https://blog.csdn.net/weixin_34452850/article/details/88991943
