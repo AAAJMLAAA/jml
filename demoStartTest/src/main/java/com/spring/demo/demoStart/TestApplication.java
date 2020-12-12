@@ -1,16 +1,17 @@
-package com.spring.demo.demoStart;
+/*package com.spring.demo.demoStart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-@EnableDemoClient
+//@EnableDemoClient
 public class TestApplication {
 public static void main(String[] args) {
-	ConfigurableApplicationContext run = SpringApplication.run(TestApplication.class, args);
-	//Person bean = (Person)run.getBean("person");
-	Person bean = run.getBean(Person.class);
-	System.out.println(bean.getName()+ " "+ bean.getPwd());
+	SpringApplication.run(TestApplication.class, args);
+//	ConfigurableApplicationContext run = SpringApplication.run(TestApplication.class, args);
+//	//Person bean = (Person)run.getBean("person");
+//	Person bean = run.getBean(Person.class);
+//	System.out.println(bean.getName()+ " "+ bean.getPwd());
 }
 }
+*/
