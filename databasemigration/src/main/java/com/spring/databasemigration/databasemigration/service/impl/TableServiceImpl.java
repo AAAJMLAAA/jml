@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.spring.databasemigration.databasemigration.concast.TableConcast;
 import com.spring.databasemigration.databasemigration.config.DataSourceContext;
 import com.spring.databasemigration.databasemigration.dao.TableDao;
+import com.spring.databasemigration.databasemigration.dao.UserDao;
 import com.spring.databasemigration.databasemigration.pojo.ColumnData;
 import com.spring.databasemigration.databasemigration.pojo.ColumnEntity;
 import com.spring.databasemigration.databasemigration.pojo.TableEntity;
@@ -33,7 +34,8 @@ public class TableServiceImpl implements TableService {
 	private TableDao tableDao;
 	//@Autowired
 //	private Environment env;
-	
+	@Autowired
+	private UserDao userDao;
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
 	
