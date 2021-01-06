@@ -1,0 +1,23 @@
+springboot项目整合各种类型的模板
+第一、控制器不能使用rest的控制器，只能使用一般的控制器@Controller
+第二、如果返回值不是视图，则在方法前使用@ResponseBody 返回json数据
+第三、返回jsp的时候，添加pom依赖在控制器中添加视图解析器的前缀
+	@Bean
+	public InternalResourceViewResolver jspViewResolver() {
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setPrefix("/META-INF/");
+		viewResolver.setSuffix(".jsp");
+		viewResolver.setOrder(2);
+		return viewResolver;
+	}
+	
+如果直接把jsp建立在resource下访问不到，必须要将webapp下WEB-INF下创建jsp
+
+第四、返回html和ftl的视图，使用自己的视图解析器FreeMarkerViewResolver，
+	public FreeMarkerConfigurer freeMarkerConfigurer() {
+		String[] templatePaths = { "classpath:/templates/" };
+		FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+		configurer.setTemplateLoaderPaths(templatePaths);
+		return configurer;
+	}
+	
